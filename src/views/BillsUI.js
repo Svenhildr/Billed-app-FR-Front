@@ -22,7 +22,7 @@ const row = (bill) => {
 const rows = (data) => {
     return data && data.length
         ? data
-              .sort((a, b) => new Date(b.date) - new Date(a.date)) // Tri des factures par date croissante
+              .sort((a, b) => new Date(b.date) - new Date(a.date)) // Tri par date croissante
               .map((bill) => row(bill))
               .join("")
         : "";

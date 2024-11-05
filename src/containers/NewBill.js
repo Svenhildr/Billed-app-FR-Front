@@ -52,18 +52,6 @@ export default class NewBill {
     };
     handleSubmit = (e) => {
         e.preventDefault();
-
-        const requiredFields = ["expenseType", "expenseName", "datepicker", "amount", "vat", "pct", "commentary"];
-        const isFormComplete = requiredFields.every((field) => {
-            const value = this[field]?.value?.trim();
-            return value && value.length > 0;
-        });
-
-        if (!isFormComplete) {
-            alert("Veuillez remplir tous les champs nécessaires.");
-            return;
-        }
-        // console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)
         const email = JSON.parse(localStorage.getItem("user")).email;
         const bill = {
             email,
