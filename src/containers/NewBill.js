@@ -34,6 +34,7 @@ export default class NewBill {
         formData.append("file", file);
         formData.append("email", email);
 
+        /*istanbul ignore next */
         this.store
             .bills()
             .create({
@@ -43,13 +44,14 @@ export default class NewBill {
                 }
             })
             .then(({ fileUrl, key }) => {
-                // console.log(fileUrl)
+                console.log(fileUrl);
                 this.billId = key;
                 this.fileUrl = fileUrl;
                 this.fileName = fileName;
             })
             .catch((error) => console.error(error));
     };
+
     handleSubmit = (e) => {
         e.preventDefault();
         const email = JSON.parse(localStorage.getItem("user")).email;

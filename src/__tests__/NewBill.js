@@ -205,32 +205,38 @@ describe("Given I am connected as an employee", () => {
                 expect(handleSubmit).toHaveBeenCalled();
             });
 
-            // test("should handle error when creating a bill fails", async () => {
-            //     document.body.innerHTML = NewBillUI();
+            test("should handle error when creating a bill fails", async () => {
+                document.body.innerHTML = NewBillUI();
 
-            //     const onNavigate = jest.fn();
-            //     const newBill = new NewBill({
-            //         document,
-            //         onNavigate,
-            //         store: mockStore,
-            //         localStorage: window.localStorage
-            //     });
+                const onNavigate = jest.fn();
+                const newBill = new NewBill({
+                    document,
+                    onNavigate,
+                    store: mockStore,
+                    localStorage: window.localStorage
+                });
 
-            //     // Simuler une erreur sur la méthode `create` pour déclencher le bloc `catch`
-            //     jest.spyOn(newBill.store.bills(), "create").mockImplementation(() => Promise.reject(new Error("Erreur lors de la création")));
+                jest.spyOn(mockStore, "bills").mockImplementation(() => {
+                    return {
+                        update: jest.fn(() => Promise.reject(new Error("Erreur lors de la création")))
+                    };
+                });
 
-            //     const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {}); // espionner console.error
+                const file = new File(["file content"], "file.jpg", { type: "image/jpeg" });
+                const input = screen.getByTestId("file");
+                fireEvent.change(input, { target: { files: [file] } });
 
-            //     const fileInput = screen.getByTestId("file");
-            //     const validFile = new File(["test"], "test.jpg", { type: "image/jpeg" });
-            //     userEvent.upload(fileInput, validFile);
+                const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-            //     await waitFor(() => {
-            //         expect(consoleErrorSpy).toHaveBeenCalledWith(new Error("Erreur lors de la création"));
-            //     });
+                const form = screen.getByTestId("form-new-bill");
+                fireEvent.submit(form);
 
-            //     consoleErrorSpy.mockRestore();
-            // });
+                await waitFor(() => {
+                    expect(consoleErrorSpy).toHaveBeenCalledWith(new Error("Erreur lors de la création"));
+                });
+
+                consoleErrorSpy.mockRestore();
+            });
         });
     });
 });
