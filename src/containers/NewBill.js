@@ -50,6 +50,7 @@ export default class NewBill {
                 this.fileName = fileName;
             })
             .catch((error) => console.error(error));
+        console.log(error.message);
     };
 
     handleSubmit = (e) => {

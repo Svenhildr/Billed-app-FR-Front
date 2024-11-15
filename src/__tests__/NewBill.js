@@ -240,3 +240,59 @@ describe("Given I am connected as an employee", () => {
         });
     });
 });
+
+//post
+
+// describe("When I post a new Bill", () => {
+//     const billPromise = {
+//         id: "47qAXb6fIm2zOKkLzMro",
+//         vat: "80",
+//         fileUrl: "https://firebasestorage.googleapis.com/v0/b/billable-677b6.a…f-1.jpg?alt=media&token=c1640e12-a24b-4b11-ae52-529112e9602a",
+//         status: "pending",
+//         type: "Hôtel et logement",
+//         commentary: "séminaire billed",
+//         name: "encore",
+//         fileName: "preview-facture-free-201801-pdf-1.jpg",
+//         date: "2004-04-04",
+//         amount: 400,
+//         commentAdmin: "ok",
+//         email: "a@a",
+//         pct: 20
+//     };
+
+//     const postMock = jest.spyOn(mockStore, "bills");
+
+//     const testBillUpdate = async (mockError, expectedError) => {
+//         if (mockError) {
+//             mockStore.bills().update = jest.fn().mockRejectedValue(mockError);
+//         } else {
+//             mockStore.bills().update = jest.fn().mockResolvedValue(billPromise);
+//         }
+
+//         try {
+//             const result = await mockStore.bills().update(billPromise);
+//             if (mockError) {
+//                 expect(result).toBeUndefined();
+//                 expect(mockStore.bills().update).toHaveBeenCalledTimes(1);
+//                 throw new Error("Test failed due to not throwing the expected error.");
+//             }
+//             expect(result).toEqual(billPromise);
+//         } catch (error) {
+//             if (expectedError) {
+//                 expect(error.message).toEqual(expectedError.message);
+//                 expect(error).toBeInstanceOf(Error);
+//                 expect(error.message).toContain("Erreur lors de la création");
+//             }
+//         }
+//     };
+
+//     test("should handle a 404 error when updating a bill", async () => {
+//         const error404 = new Error("Erreur lors de la création");
+//         await testBillUpdate(error404, new Error("Erreur lors de la création"));
+//     });
+
+//     test("should handle a 500 error when updating a bill", async () => {
+//         const error500 = new Error("Erreur lors de la création");
+//         await testBillUpdate(error500, new Error("Erreur lors de la création"));
+//     });
+// });
